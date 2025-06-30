@@ -23,7 +23,7 @@ public:
     bool rollFile();
 
 private:
-    static std::string getLogFileName(const std::string &basename, time_t, *now);
+    static std::string getLogFileName(const std::string &basename, time_t *now);
     void appendInlock(const char *data, int len);
 
     const std::string basename_;
