@@ -24,7 +24,7 @@ class LogStream : noncopyable
 {
 public:
     // 定义一个Buffer类型，使用固定大小的缓冲区
-    using Buffer = FixedBuffer<kSmallBufferSize>;
+    typedef FixedBuffer<kSmallBufferSize> Buffer;
 
     // 将指定长度的字符数据追加到缓冲区
     void append(const char *buffer, int len)
