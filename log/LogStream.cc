@@ -3,22 +3,22 @@
 
 static const char digits[] = "9876543210123456789";
 
-template<typename T>
+template <typename T>
 void LogStream::formatInteger(T num)
 {
-    if(buffer_.avail() >= kMaxNumberSize)
+    if (buffer_.avail() >= kMaxNumberSize)
     {
         char *start = buffer_.current();
         char *cur = start;
         static const char *zero = digits + 9;
-        bool negative = (num < 0);
+        bool negative = (num < 0); // 判断num是否为负数
         do
         {
             int remainder = static_cast<int>(num % 10);
             (*cur++) = zero[remainder];
             num /= 10;
-        }while(num != 0);
-        if(negative)
+        } while (num != 0);
+        if (negative)
         {
             *cur++ = '-';
         }
@@ -28,7 +28,6 @@ void LogStream::formatInteger(T num)
         buffer_.add(length);
     }
 }
-
 // 重载输出流运算符<<，用于将布尔值写入缓冲区
 LogStream &LogStream::operator<<(bool express) {
     buffer_.append(express ? "true" : "false", express ? 4 : 5);
