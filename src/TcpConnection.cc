@@ -220,7 +220,7 @@ void TcpConnection::handleWrite()
 
 void TcpConnection::handleClose()
 {
-    LOG_INFO<<"TCPConnection::handleClose fd="<<channel_->fd()<<"state="<<(int)state_;
+    LOG_INFO<<"TCPConnection::handleClose fd="<<channel_->fd()<<" state="<<(int)state_;
     setState(kDisconnected);
     channel_->disableAll();
 
@@ -242,7 +242,7 @@ void TcpConnection::handleError()
     {
         err = optval;
     }
-    LOG_ERROR<<"TcpConnection::handleError name:"<<name_.c_str()<<"- SO_ERROR:%"<<err;
+    LOG_ERROR<<"TcpConnection::handleError name: "<<name_.c_str()<<" - SO_ERROR:% "<<err;
 }
 
 void TcpConnection::sendFile(int fileDescriptor, off_t offset, size_t count)
