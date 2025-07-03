@@ -90,7 +90,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress &peerAddr)
     conn->setWriteCompleteCallback(writeCompleteCallback_);
 
     // 设置了如何关闭连接的回调
-    conn->setCloseCallback(std::bind(TcpServer::removeConnection, this, std::placeholders::_1));
+    conn->setCloseCallback(std::bind(&TcpServer::removeConnection, this, std::placeholders::_1));
 
     ioLoop->runInLoop(std::bind(&TcpConnection::connectEstablished, conn));
 }

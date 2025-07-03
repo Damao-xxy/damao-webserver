@@ -1,7 +1,7 @@
 #include <Thread.h>
 #include <CurrentThread.h>
 
-#include <semaphore>
+#include <semaphore.h>
 
 std::atomic_int Thread::numCreated_(0);
 
@@ -19,7 +19,7 @@ Thread::~Thread()
 {
     if(started_ && !joined_)
     {
-        thread_.detach();  //// thread类提供了设置分离线程的方法 线程运行后自动销毁（非阻塞）
+        thread_->detach();  //// thread类提供了设置分离线程的方法 线程运行后自动销毁（非阻塞）
     }
 }
 

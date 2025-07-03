@@ -13,12 +13,12 @@ const char *getErrnoMsg(int savedErrno)
 }
 
 const char *getLevelName[Logger::LogLevel::LEVEL_COUNT]{
-    "TRACE",
-    "DEBUG",
-    "INFO",
-    "WARN",
-    "ERROR",
-    "FATAL",
+    "TRACE ",
+    "DEBUG ",
+    "INFO ",
+    "WARN ",
+    "ERROR ",
+    "FATAL ",
 };
 
 static void defaultOutput(const char *data, int len)

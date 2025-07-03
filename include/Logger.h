@@ -64,6 +64,7 @@ private:
         SourceFile basename_;
     };
 
+private:
     Impl impl_;
 };
 
@@ -73,11 +74,11 @@ const char* getErrnoMsg(int savedErrno);
  * 比如设置等级为FATAL，则logLevel等级大于DEBUG和INFO，DEBUG和INFO等级的日志就不会输出
  */
 #ifdef OPEN_LOGGING
-#define LOG_DEBUG Logger(__FILE__, __LINE__, Logger::DEBUG).stream();
-#define LOG_INFO Logger(__FILE__, __LINE__, Logger::INFO).stream();
-#define LOG_WARN Logger(__FILE__, __LINE__, Logger::WARN).stream();
-#define LOG_ERROR Logger(__FILE__, __LINE__, Logger::ERROR).stream();
-#define LOG_FATAL Logger(__FILE__, __LINE__, Logger::FATAL).stream();
+#define LOG_DEBUG Logger(__FILE__, __LINE__, Logger::DEBUG).stream()
+#define LOG_INFO Logger(__FILE__, __LINE__, Logger::INFO).stream()
+#define LOG_WARN Logger(__FILE__, __LINE__, Logger::WARN).stream()
+#define LOG_ERROR Logger(__FILE__, __LINE__, Logger::ERROR).stream()
+#define LOG_FATAL Logger(__FILE__, __LINE__, Logger::FATAL).stream()
 #else
 #define LOG(level) LogStream()
 #endif

@@ -41,7 +41,7 @@ TimerQueue::~TimerQueue()
     // 删除所有定时器
     for(const Entry& timer : timers_)
     {
-        delete time.second;
+        delete timer.second;
     }
 }
 

@@ -12,7 +12,7 @@ const int kDeleted = 2;
 
 EPollPoller::EPollPoller(EventLoop *loop) 
     : Poller(loop)
-    , epollfd_(::poll_create1(POLL_CLOEXEC))
+    , epollfd_(::epoll_create1(EPOLL_CLOEXEC))
     , events_(kInitEventListSize){
     if(epollfd_ < 0){
         LOG_FATAL<<"epoll_create error:%d \n"<<errno;
@@ -23,7 +23,7 @@ EPollPoller::~EPollPoller(){
     ::close(epollfd_);
 }
 
-Timestamp EPollPoller::poll(iint timeoutMs, ChannelList *activeChannels){
+Timestamp EPollPoller::poll(int timeoutMs, ChannelList *activeChannels){
     LOG_INFO<<"fd total count:"<<channels_.size();
 
     int numEvents = ::epoll_wait(epollfd_, &*events_.begin(), static_cast<int>(events_.size()), timeoutMs);
@@ -63,7 +63,7 @@ void EPollPoller::updateChannel(Channel *channel){
         int fd = channel->fd();
         if(channel->isNoneEvent()){
             update(EPOLL_CTL_DEL, channel);
-            channel->set_index(kDeleted)
+            channel->set_index(kDeleted);
         }else{
             update(EPOLL_CTL_MOD, channel);
         }
@@ -74,7 +74,7 @@ void EPollPoller::removeChannel(Channel *channel){
     int fd = channel->fd();
     channels_.erase(fd);
 
-    LOG_INFO<<"removeChannel fd="<<fd;
+    LOG_INFO<<"removeChannel fd=" << fd;
 
     int index = channel->index();
     if(index == kAdded){
